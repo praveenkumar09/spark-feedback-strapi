@@ -1,0 +1,13 @@
+{
+  "kind": "collectionType",
+  "collectionName": "questionnaires",
+  "info": { "singularName": "questionnaire", "pluralName": "questionnaires", "displayName": "Questionnaire", "description": "One set of questions per way the policy was sold" },
+  "options": { "draftAndPublish": true },
+  "pluginOptions": {},
+  "attributes": {
+    "key": { "type": "string", "required": true, "unique": true },
+    "channel": { "type": "enumeration", "enum": ["NFTF", "FTF", "GENERAL"], "required": true },
+    "title": { "type": "string", "required": true },
+    "questions": { "type": "relation", "relation": "oneToMany", "target": "api::question.question", "mappedBy": "questionnaire" }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "collectionName": "components_shared_texts",
+  "info": { "displayName": "Text in a language", "description": "The wording of a question in one language" },
+  "options": {},
+  "attributes": {
+    "locale": { "type": "enumeration", "enum": ["en", "ms", "zh", "ta"], "required": true },
+    "text": { "type": "text", "required": true }
+  }
+}

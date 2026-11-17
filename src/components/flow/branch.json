@@ -1,0 +1,9 @@
+{
+  "collectionName": "components_flow_branches",
+  "info": { "displayName": "Branch", "description": "If the answer is X, go to question Y. The first matching branch wins; leave 'next' empty to end the questionnaire." },
+  "options": {},
+  "attributes": {
+    "when": { "type": "enumeration", "enum": ["YES", "NO", "ANY"], "required": true, "default": "ANY" },
+    "next": { "type": "string" }
+  }
+}

@@ -1,0 +1,48 @@
+# Strapi Community (MIT): editors change the Spark Feedback questions, their wording in 4 languages, and the branches here.
+# Runs separately from the API. It stores its content in the `strapi` schema of the API stack's Postgres,
+# and the API reads the published questions from it. Both stacks share one Docker network.
+#
+# Start order: 1) spark-feedback-api (creates the network and Postgres)  2) this stack.
+# Host port: 1337 (bound to this machine only).
+
+services:
+  strapi:
+    build:
+      context: .
+    container_name: spark_feedback_strapi
+    ports:
+      - "127.0.0.1:1337:1337"
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 1337
+      DATABASE_HOST: ${DATABASE_HOST:-spark_feedback_postgres}
+      DATABASE_PORT: ${DATABASE_PORT:-5432}
+      DATABASE_NAME: spark
+      DATABASE_USERNAME: spark
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-spark}
+      DATABASE_SCHEMA: strapi
+      APP_KEYS: ${STRAPI_APP_KEYS:-spark-key-1,spark-key-2,spark-key-3,spark-key-4}
+      ADMIN_JWT_SECRET: ${STRAPI_ADMIN_JWT_SECRET:-spark-dev-admin-jwt-secret-change-me}
+      API_TOKEN_SALT: ${STRAPI_API_TOKEN_SALT:-spark-dev-api-token-salt-change-me}
+      TRANSFER_TOKEN_SALT: ${STRAPI_TRANSFER_TOKEN_SALT:-spark-dev-transfer-salt-change-me}
+      ENCRYPTION_KEY: ${STRAPI_ENCRYPTION_KEY:-spark-dev-encryption-key-change-me}
+      JWT_SECRET: ${STRAPI_JWT_SECRET:-spark-dev-jwt-secret-change-me}
+      STRAPI_ADMIN_EMAIL: ${STRAPI_ADMIN_EMAIL:-admin@spark.local}
+      STRAPI_ADMIN_PASSWORD: ${STRAPI_ADMIN_PASSWORD:-SparkAdmin#2026}
+      STRAPI_TELEMETRY_DISABLED: "true"
+    networks:
+      default:
+        aliases:
+          - strapi
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:1337/_health >/dev/null 2>&1 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 60s
+
+networks:
+  default:
+    name: spark_feedback_net
+    external: true

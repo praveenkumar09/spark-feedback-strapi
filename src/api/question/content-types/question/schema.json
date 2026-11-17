@@ -1,0 +1,15 @@
+{
+  "kind": "collectionType",
+  "collectionName": "questions",
+  "info": { "singularName": "question", "pluralName": "questions", "displayName": "Question", "description": "A question, its wording in four languages, and where to go next" },
+  "options": { "draftAndPublish": true },
+  "pluginOptions": {},
+  "attributes": {
+    "key": { "type": "string", "required": true },
+    "order": { "type": "integer", "required": true, "default": 1 },
+    "type": { "type": "enumeration", "enum": ["YES_NO", "OPEN_YES_NO", "OPEN_TEXT"], "required": true, "default": "YES_NO" },
+    "texts": { "type": "component", "repeatable": true, "component": "shared.text", "required": true },
+    "branches": { "type": "component", "repeatable": true, "component": "flow.branch" },
+    "questionnaire": { "type": "relation", "relation": "manyToOne", "target": "api::questionnaire.questionnaire", "inversedBy": "questions" }
+  }
+}

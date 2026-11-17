@@ -1,0 +1,23 @@
+{
+  "name": "spark-feedback-questions",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Question configuration for Spark Feedback (Strapi Community, MIT)",
+  "scripts": {
+    "build": "strapi build",
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "strapi": "strapi"
+  },
+  "dependencies": {
+    "@strapi/plugin-users-permissions": "^5.12.0",
+    "@strapi/strapi": "^5.12.0",
+    "pg": "^8.13.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "styled-components": "^6.1.13"
+  },
+  "engines": { "node": ">=20.0.0 <=24.x.x", "npm": ">=6.0.0" },
+  "strapi": { "uuid": false }
+}
